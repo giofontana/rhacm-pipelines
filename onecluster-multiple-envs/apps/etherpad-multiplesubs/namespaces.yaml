@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: etherpad-app
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: etherpad-app-dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: etherpad-app-qa

@@ -214,7 +214,7 @@ data:
       /*
       * The default text of a pad
       */
-      "defaultPadText" : "Welcome to the OpenTLC Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n",
+      "defaultPadText" : "Welcome to the OpenTLC Etherpad!\n\nENVIRONMENT=DEV!\n",
 
       /*
       * Default Pad behavior.
