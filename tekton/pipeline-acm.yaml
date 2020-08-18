@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-using-acm
+spec:
+  resources:
+  - name: git-repo
+    type: git
+  params:
+  - name: deployment-name
+    type: string
+    description: name of the deployment to be patched
+  tasks:
+  - name: create-namespaces
+    taskRef:
+      name: create-namespaces
+    resources:
+      inputs:
+      - name: source
+        resource: git-repo

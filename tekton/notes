@@ -16,3 +16,10 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 NAME       SECRETS   AGE
 pipeline   2         29s
 
+> oc create -f https://raw.githubusercontent.com/giofontana/rhacm-pipelines/master/tekton/tasks/01_create_namespaces.yaml
+task.tekton.dev/create-namespaces created
+
+> tkn task list
+NAME                DESCRIPTION   AGE
+create-namespaces                 58 seconds ago
+
