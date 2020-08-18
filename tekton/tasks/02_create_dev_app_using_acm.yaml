@@ -1,18 +1,14 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: create-namespaces
+  name: etherpad-dev-deployment
 spec:
-  resources:
-    inputs:
-      - {type: image, name: image}
-  params:
-    - name: deployment
-      description: The name of the deployment patch the image
-      type: string
+  workspaces:
+    - name: source  
   steps:
     - name: patch
       image: quay.io/openshift/origin-cli:latest
+      workingDir: /workspace/source  
       command: ["/bin/bash", "-c"]
       args:
         - |-

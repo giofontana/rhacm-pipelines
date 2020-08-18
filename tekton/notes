@@ -1,8 +1,8 @@
 
 
-> oc new-project etherpad-pipeline
+> oc new-project etherpad-cicd
 
-Now using project "etherpad-pipeline" on server "https://api.acmhub.rhbr-labs.com:6443".
+Now using project "etherpad-cicd" on server "https://api.acmhub.rhbr-labs.com:6443".
 
 You can add applications to this project with the 'new-app' command. For example, try:
 
@@ -16,10 +16,17 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 NAME       SECRETS   AGE
 pipeline   2         29s
 
-> oc create -f https://raw.githubusercontent.com/giofontana/rhacm-pipelines/master/tekton/tasks/01_create_namespaces.yaml
+> oc create -f tasks/01_create_namespaces.yaml
 task.tekton.dev/create-namespaces created
 
-> tkn task list
-NAME                DESCRIPTION   AGE
-create-namespaces                 58 seconds ago
+> oc apply -f tasks/02_create_dev_app_using_acm.yaml
+task.tekton.dev/create-dev-app-using-acm created
 
+> oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:etherpad-cicd:pipeline
+clusterrole.rbac.authorization.k8s.io/cluster-admin added: "system:serviceaccount:etherpad-cicd:pipeline"
+
+> oc apply -f pipeline-acm.yaml
+pipeline.tekton.dev/deploy-using-acm created
+
+> oc apply -f pipelinerun.yaml
+pipelinerun.tekton.dev/deploy-using-acm-run-1 created

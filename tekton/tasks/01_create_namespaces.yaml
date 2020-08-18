@@ -3,13 +3,17 @@ kind: Task
 metadata:
   name: create-namespaces
 spec:
-  resources:
-    inputs:
-      - {type: image, name: image}
+  workspaces:
+    - name: source  
   steps:
     - name: patch
       image: quay.io/openshift/origin-cli:latest
+      workingDir: /workspace/source      
       command: ["/bin/bash", "-c"]
       args:
         - |-
+          echo Creating namespaces
+          pwd
+          ls -lhs
+          ls -lhs /workspace/source
           oc apply -f onecluster-multiple-envs/apps/etherpad-multiple-envs/namespaces.yaml
