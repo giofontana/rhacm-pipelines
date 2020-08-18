@@ -16,4 +16,4 @@ spec:
           pwd
           ls -lhs
           ls -lhs /workspace/source
-          oc apply -f onecluster-multiple-envs/apps/etherpad-multiple-envs/namespaces.yaml
+          oc apply -f onecluster-multiple-envs/rhacm/namespaces.yaml

@@ -16,11 +16,19 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 NAME       SECRETS   AGE
 pipeline   2         29s
 
+> cd tekton
+
 > oc create -f tasks/01_create_namespaces.yaml
 task.tekton.dev/create-namespaces created
 
-> oc apply -f tasks/02_create_dev_app_using_acm.yaml
-task.tekton.dev/create-dev-app-using-acm created
+> oc create -f tasks/02_create_dev_app_using_acm.yaml
+task.tekton.dev/etherpad-dev-deployment created
+
+> oc apply -f tasks/03_create_qa_app_using_acm.yaml
+task.tekton.dev/etherpad-qa-deployment created
+
+> oc apply -f tasks/04_create_prd_app_using_acm.yaml
+task.tekton.dev/etherpad-prd-deployment created
 
 > oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:etherpad-cicd:pipeline
 clusterrole.rbac.authorization.k8s.io/cluster-admin added: "system:serviceaccount:etherpad-cicd:pipeline"

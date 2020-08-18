@@ -34,6 +34,7 @@ spec:
       value: "true"
     - name: revision
       value: $(params.git-revision)
+      
   - name: create-namespaces
     taskRef:
       kind: Task        
@@ -43,6 +44,7 @@ spec:
       workspace: shared-workspace
     runAfter:
     - fetch-repository     
+
   - name: etherpad-dev-deployment
     taskRef:
       kind: Task        
@@ -52,6 +54,7 @@ spec:
       workspace: shared-workspace
     runAfter:
     - create-namespaces      
+
   - name: etherpad-qa-deployment
     taskRef:
       kind: Task        
@@ -60,7 +63,8 @@ spec:
     - name: source
       workspace: shared-workspace
     runAfter:
-    - etherpad-dev-deployment   
+    - etherpad-dev-deployment  
+
   - name: etherpad-prd-deployment
     taskRef:
       kind: Task        

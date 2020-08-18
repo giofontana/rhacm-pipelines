@@ -7,7 +7,7 @@ metadata:
   labels:
     app: etherpad-acm-qa
   annotations:
-    apps.open-cluster-management.io/github-path: onecluster-multiple-envs/resources/etherpad/qa
+    apps.open-cluster-management.io/github-path: onecluster-multiple-envs/app-resources/etherpad/qa
 spec:
   channel: etherpad-acm-qa/etherpad-app-latest
   placement:

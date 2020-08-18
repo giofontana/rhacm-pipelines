@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: etherpad-qa-deployment
+spec:
+  workspaces:
+    - name: source  
+  steps:
+    - name: patch
+      image: quay.io/openshift/origin-cli:latest
+      workingDir: /workspace/source  
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          oc apply -f onecluster-multiple-envs/rhacm/qa/application.yaml
+          oc apply -f onecluster-multiple-envs/rhacm/qa/channel.yaml
+          oc apply -f onecluster-multiple-envs/rhacm/qa/placement-rule.yaml
+          oc apply -f onecluster-multiple-envs/rhacm/qa/subscription.yaml

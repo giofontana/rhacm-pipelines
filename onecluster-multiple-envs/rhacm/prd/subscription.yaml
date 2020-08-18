@@ -7,7 +7,7 @@ metadata:
   labels:
     app: etherpad-acm-prd
   annotations:
-    apps.open-cluster-management.io/github-path: onecluster-multiple-envs/resources/etherpad/prd
+    apps.open-cluster-management.io/github-path: onecluster-multiple-envs/app-resources/etherpad/prd
 spec:
   channel: etherpad-acm-prd/etherpad-app-latest
   placement:
