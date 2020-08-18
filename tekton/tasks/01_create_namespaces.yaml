@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-namespaces
+spec:
+  resources:
+    inputs:
+      - {type: image, name: image}
+  params:
+    - name: deployment
+      description: The name of the deployment patch the image
+      type: string
+  steps:
+    - name: patch
+      image: quay.io/openshift/origin-cli:latest
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          oc apply -f onecluster-multiple-envs/apps/etherpad-multiple-envs/namespaces.yaml
