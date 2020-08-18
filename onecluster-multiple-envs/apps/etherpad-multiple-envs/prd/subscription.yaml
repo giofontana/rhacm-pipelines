@@ -2,16 +2,16 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
-  name: etherpad-acm-dev
-  namespace: etherpad-acm-dev
+  name: etherpad-acm-prd
+  namespace: etherpad-acm-prd
   labels:
-    app: etherpad-acm-dev
+    app: etherpad-acm-prd
   annotations:
-    apps.open-cluster-management.io/github-path: onecluster-multiple-envs/resources/etherpad/dev
+    apps.open-cluster-management.io/github-path: onecluster-multiple-envs/resources/etherpad/prd
 spec:
-  channel: etherpad-acm-dev/etherpad-app-latest
+  channel: etherpad-acm-prd/etherpad-app-latest
   placement:
     placementRef:
       kind: PlacementRule
-      name: dev-cluster
+      name: prd-cluster
 

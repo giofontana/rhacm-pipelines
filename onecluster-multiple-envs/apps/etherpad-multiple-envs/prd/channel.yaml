@@ -3,7 +3,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
   name: etherpad-app-latest
-  namespace: etherpad-acm-dev
+  namespace: etherpad-acm-prd
 spec:
   type: GitHub
   pathname: https://github.com/giofontana/rhacm-pipelines.git

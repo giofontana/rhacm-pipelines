@@ -2,8 +2,8 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: dev-cluster
-  namespace: etherpad-acm-dev
+  name: prd-cluster
+  namespace: etherpad-acm-prd
 spec:
   clusterConditions:
     - type: ManagedClusterConditionAvailable
