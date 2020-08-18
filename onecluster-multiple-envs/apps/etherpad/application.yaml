@@ -1,13 +1,4 @@
 ---
-apiVersion: apps.open-cluster-management.io/v1
-kind: Channel
-metadata:
-  name: etherpad-app-latest
-  namespace: etherpad
-spec:
-  type: GitHub
-  pathname: https://github.com/redhat-gpte-devopsautomation/rhacm-labs.git
----
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
@@ -24,20 +15,3 @@ spec:
       operator: In
       values:
       - etherpad-app
----
-apiVersion: apps.open-cluster-management.io/v1
-kind: Subscription
-metadata:
-  name: etherpad-app
-  namespace: etherpad
-  labels:
-    app: etherpad-app
-  annotations:
-    apps.open-cluster-management.io/github-path: resources/etherpad
-spec:
-  channel: etherpad/etherpad-app-latest
-  placement:
-    placementRef:
-      kind: PlacementRule
-      name: dev-clusters
-

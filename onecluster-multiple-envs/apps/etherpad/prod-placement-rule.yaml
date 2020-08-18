@@ -1,7 +1,7 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: dev-clusters
+  name: prd-cluster
   namespace: etherpad
 spec:
   clusterConditions:
@@ -9,4 +9,4 @@ spec:
       status: "True"
   clusterSelector:
     matchLabels:
-      environment: dev
+      environment: prd
