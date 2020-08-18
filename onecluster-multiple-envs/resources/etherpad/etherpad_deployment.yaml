@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: etherpad
+  name: etherpad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etherpad
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: etherpad
+    spec:
+      containers:
+      - env:
+        - name: DB_TYPE
+          value: postgres
+        - name: DB_HOST
+          value: postgresql
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_DATABASE
+          value: etherpad
+        - name: DB_USER
+          value: ether
+        - name: DB_PASS
+          value: ether
+        - name: NODE_ENV
+          value: production
+        image: quay.io/gpte-devops-automation/etherpad:latest
+        imagePullPolicy: Always
+        name: etherpad
+        ports:
+        - containerPort: 9001
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 9001
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 9001
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /opt/etherpad/config
+          name: etherpad-settings
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: etherpad-settings
+        name: etherpad-settings

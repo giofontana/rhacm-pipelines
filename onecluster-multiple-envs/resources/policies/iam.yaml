@@ -1,0 +1,34 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-limitclusteradmin
+  namespace: rhacm-policies
+spec:
+  complianceType: musthave
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: IamPolicy
+        metadata:
+          name: policy-limitclusteradmin-example
+        spec:
+          severity: medium
+          namespaceSelector: {}
+          remediationAction: inform
+          maxClusterRoleBindingUsers: 5
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-iam
+  namespace: rhacm-policies
+placementRef:
+  name: dev-clusters
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-iam
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
