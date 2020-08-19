@@ -6,13 +6,20 @@ spec:
   workspaces:
     - name: source  
   steps:
-    - name: patch
+    - name: etherpad-qa-deployment
       image: quay.io/openshift/origin-cli:latest
       workingDir: /workspace/source  
       command: ["/bin/bash", "-c"]
       args:
         - |-
+          echo "**** QA ENVIRONMENT: Creating application on RH ACM ****"
           oc apply -f onecluster-multiple-envs/rhacm/qa/application.yaml
+
+          echo "**** QA ENVIRONMENT: Creating channel on RH ACM ****"
           oc apply -f onecluster-multiple-envs/rhacm/qa/channel.yaml
+
+          echo "**** QA ENVIRONMENT: Creating placementrule on RH ACM ****"
           oc apply -f onecluster-multiple-envs/rhacm/qa/placement-rule.yaml
+
+          echo "**** QA ENVIRONMENT: Creating subscription on RH ACM ****"
           oc apply -f onecluster-multiple-envs/rhacm/qa/subscription.yaml

@@ -6,14 +6,11 @@ spec:
   workspaces:
     - name: source  
   steps:
-    - name: patch
+    - name: creating-namespaces
       image: quay.io/openshift/origin-cli:latest
       workingDir: /workspace/source      
       command: ["/bin/bash", "-c"]
       args:
         - |-
-          echo Creating namespaces
-          pwd
-          ls -lhs
-          ls -lhs /workspace/source
+          echo "**** Creating namespaces ****"
           oc apply -f onecluster-multiple-envs/rhacm/namespaces.yaml
