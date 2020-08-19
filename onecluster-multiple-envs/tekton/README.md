@@ -1,5 +1,9 @@
 
+# Create CD workflow on RH ACM using Tekton
 
+Procedure:
+
+```console
 > oc new-project etherpad-cicd
 
 Now using project "etherpad-cicd" on server "https://api.acmhub.rhbr-labs.com:6443".
@@ -16,7 +20,7 @@ to build a new example application in Python. Or use kubectl to deploy a simple 
 NAME       SECRETS   AGE
 pipeline   2         29s
 
-> cd tekton
+> cd onecluster-multiple-envs/tekton
 
 > oc create -f tasks/01_create_namespaces.yaml
 task.tekton.dev/create-namespaces created
@@ -36,5 +40,9 @@ clusterrole.rbac.authorization.k8s.io/cluster-admin added: "system:serviceaccoun
 > oc apply -f pipeline-acm.yaml
 pipeline.tekton.dev/deploy-using-acm created
 
+> oc apply -f prepare/tekton-source-pvc.yaml
+persistentvolumeclaim/source-pvc created
+
 > oc apply -f pipelinerun.yaml
 pipelinerun.tekton.dev/deploy-using-acm-run-1 created
+```
