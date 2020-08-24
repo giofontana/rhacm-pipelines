@@ -101,3 +101,4 @@ pipelinerun.tekton.dev/deploy-using-acm-run-1 created
 [etherpad-prd-deployment : etherpad-qa-deployment] subscription.apps.open-cluster-management.io/etherpad-acm-prd unchanged
 
 ```
+
