@@ -5,6 +5,9 @@ kind: Task
 metadata:
   name: create-namespaces
 spec:
+  params:
+    - name: rhacmdir
+      type: string  
   workspaces:
     - name: source  
   steps:
@@ -15,4 +18,4 @@ spec:
       args:
         - |-
           echo "**** Creating namespaces ****"
-          oc apply -f multipleclusters-multiple-envs/rhacm/namespaces.yaml
+          oc apply -f "$(params.rhacmdir)/namespaces.yaml"
