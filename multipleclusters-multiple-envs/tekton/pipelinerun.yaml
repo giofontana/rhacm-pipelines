@@ -1,0 +1,24 @@
+
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: deploy-using-acm-run-1
+  namespace: etherpad-cicd
+  labels:
+    tekton.dev/pipeline: deploy-using-acm
+spec:
+  params:
+    - name: deployment-name
+      value: teste-1
+    - name: git-url
+      value: 'https://github.com/giofontana/rhacm-pipelines.git'
+    - name: git-revision
+      value: master
+  pipelineRef:
+    name: deploy-using-acm
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - name: shared-workspace
+      persistentvolumeclaim:
+        claimName: source-pvc

@@ -1,0 +1,76 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-using-acm
+spec:
+  workspaces:
+  - name: shared-workspace
+  params:
+  - name: deployment-name
+    type: string
+    description: name of the deployment to be patched
+  - name: git-url
+    type: string
+    description: url of the git repo for the code of deployment
+    default: "https://github.com/giofontana/rhacm-pipelines.git"
+  - name: git-revision
+    type: string
+    description: revision to be used from repo of the code for deployment
+    default: "master"
+  tasks:
+  - name: fetch-repository
+    taskRef:
+      name: git-clone
+      kind: ClusterTask
+    workspaces:
+    - name: output
+      workspace: shared-workspace
+    params:
+    - name: url
+      value: $(params.git-url)
+    - name: subdirectory
+      value: ""
+    - name: deleteExisting
+      value: "true"
+    - name: revision
+      value: $(params.git-revision)
+      
+  - name: create-namespaces
+    taskRef:
+      kind: Task        
+      name: create-namespaces
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - fetch-repository     
+
+  - name: etherpad-dev-deployment
+    taskRef:
+      kind: Task        
+      name: etherpad-dev-deployment
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - create-namespaces      
+
+  - name: etherpad-qa-deployment
+    taskRef:
+      kind: Task        
+      name: etherpad-qa-deployment
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - etherpad-dev-deployment  
+
+  - name: etherpad-prd-deployment
+    taskRef:
+      kind: Task        
+      name: etherpad-prd-deployment
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - etherpad-qa-deployment   

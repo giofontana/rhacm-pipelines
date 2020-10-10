@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-namespaces
+spec:
+  workspaces:
+    - name: source  
+  steps:
+    - name: creating-namespaces
+      image: quay.io/openshift/origin-cli:latest
+      workingDir: /workspace/source      
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          echo "**** Creating namespaces ****"
+          oc apply -f multipleclusters-multiple-envs/rhacm/namespaces.yaml

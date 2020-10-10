@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: etherpad-prd-deployment
+spec:
+  workspaces:
+    - name: source  
+  steps:
+    - name: etherpad-qa-deployment
+      image: quay.io/openshift/origin-cli:latest
+      workingDir: /workspace/source  
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          echo "**** PRD ENVIRONMENT: Creating application on RH ACM ****"
+          oc apply -f multipleclusters-multiple-envs/rhacm/prd/application.yaml
+
+          echo "**** PRD ENVIRONMENT: Creating channel on RH ACM ****"
+          oc apply -f multipleclusters-multiple-envs/rhacm/prd/channel.yaml
+
+          echo "**** PRD ENVIRONMENT: Creating placementrule on RH ACM ****"
+          oc apply -f multipleclusters-multiple-envs/rhacm/prd/placement-rule.yaml
+
+          echo "**** PRD ENVIRONMENT: Creating subscription on RH ACM ****"
+          oc apply -f multipleclusters-multiple-envs/rhacm/prd/subscription.yaml
