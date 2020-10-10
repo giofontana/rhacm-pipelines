@@ -180,3 +180,9 @@ deployment.apps/klusterlet created
 klusterlet.operator.open-cluster-management.io/klusterlet created
 
 ```
+
+# INSTALLING OPENSHIFT PIPELINES
+
+OpenShift pipelines is installed through an Operator. The step-by-step can be found here: https://github.com/openshift/pipelines-tutorial/blob/master/install-operator.md
+
+

@@ -1,3 +1,5 @@
+
+---
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -6,7 +8,7 @@ spec:
   workspaces:
     - name: source  
   steps:
-    - name: etherpad-qa-deployment
+    - name: etherpad-prd-deployment
       image: quay.io/openshift/origin-cli:latest
       workingDir: /workspace/source  
       command: ["/bin/bash", "-c"]
