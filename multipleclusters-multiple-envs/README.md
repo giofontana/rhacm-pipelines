@@ -75,13 +75,13 @@ Our pipeline now will cover the following process:
 
 ![Multiple Clusters Deployment Pipeline](images/pipeline.png)
 
-* **[TEKTON - TASK creating-namespaces]** Create the namespaces on the OpenShift Hub Cluster (where RH ACM is deployed);
-* **[TEKTON - TASK etherpad-dev-deployment]** Create Application, Channel, PlacementRule for NON-PRODUCTION and Subscription;
-* **[RH ACM - DEV DEPLOYMENT]** Deploy etherpad application on etherpad-dev namespace in NON-PRODUCTION cluster
-* **[TEKTON - TASK etherpad-qa-deployment]** Create Application, Channel, PlacementRule for NON-PRODUCTION and Subscription;
-* **[RH ACM - QA DEPLOYMENT]** Deploy etherpad application on etherpad-qa namespace in NON-PRODUCTION cluster
-* **[TEKTON - TASK etherpad-prd-deployment]** Create Application, Channel, PlacementRule for PRODUCTION + DR and Subscription;
-* **[RH ACM - PROD + DR DEPLOYMENT]** Deploy etherpad application on etherpad-prod namespace in PRODUCTION and DR cluster.
+1. **[TEKTON - TASK creating-namespaces]** Create the namespaces on the OpenShift Hub Cluster (where RH ACM is deployed);
+2. **[TEKTON - TASK etherpad-dev-deployment]** Create Application, Channel, PlacementRule for NON-PRODUCTION and Subscription;
+3. **[RH ACM - DEV DEPLOYMENT]** Deploy etherpad application on etherpad-dev namespace in NON-PRODUCTION cluster
+4. **[TEKTON - TASK etherpad-qa-deployment]** Create Application, Channel, PlacementRule for NON-PRODUCTION and Subscription;
+5. **[RH ACM - QA DEPLOYMENT]** Deploy etherpad application on etherpad-qa namespace in NON-PRODUCTION cluster
+6. **[TEKTON - TASK etherpad-prd-deployment]** Create Application, Channel, PlacementRule for PRODUCTION + DR and Subscription;
+7. **[RH ACM - PROD + DR DEPLOYMENT]** Deploy etherpad application on etherpad-prod namespace in PRODUCTION and DR cluster.
 
 Here we can notice something that in my perspective is really valuable about using **RH ACM** as your deployment tool: You don’t need to change anything in your pipeline because now you need to deploy your application in more clusters - **you just need to change the PlacementRule object** of the environment you need to change. In the last article we deployed the Dev, QA and Prod application in a single cluster, we are now deploying this same application using three different clusters and what have we changed? Only the PlacementRule object! Very nice right?
 
