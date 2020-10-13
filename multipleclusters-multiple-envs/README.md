@@ -1,4 +1,4 @@
-# GitOps Using Red Hat OpenShift Pipelines (Tekton) and Red Hat Advanced Cluster Management to Deploy on Managing Multiple Clusters
+# GitOps Using Red Hat OpenShift Pipelines (Tekton) and Red Hat Advanced Cluster Management to Deploy on Multiple Clusters
 ### October 13th, 2020 | by Giovanni Fontana
 
 
